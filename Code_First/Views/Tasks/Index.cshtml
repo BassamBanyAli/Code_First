@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Code_First.Models.Student>
+﻿@model IEnumerable<Code_First.Models.Task>
 
 @{
     ViewBag.Title = "Index";
@@ -19,7 +19,10 @@
             @Html.DisplayNameFor(model => model.Class.ClassName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.StudentName)
+            @Html.DisplayNameFor(model => model.TaskName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
         </th>
         <th></th>
     </tr>
@@ -31,12 +34,15 @@
                 @Html.DisplayFor(modelItem => item.Class.ClassName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.StudentName)
+                @Html.DisplayFor(modelItem => item.TaskName)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.StudentId }) |
-                @Html.ActionLink("Details", "Details", new { id = item.StudentId }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.StudentId })
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.TaskId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.TaskId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.TaskId })
             </td>
         </tr>
     }

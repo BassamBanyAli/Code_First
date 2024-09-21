@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Code_First.Models.Subject>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 class="text-center mb-4">Subjects</h2>
+
+<p class="text-end">
+    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
+</p>
+
+<div class="table-responsive">
+    <table class="table table-striped table-bordered">
+        <thead class="table-light">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().Name)
+                </th>
+                <th class="text-center">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td class="text-center">
+                        @Html.ActionLink("Edit", "Edit", new { id = item.SubjectId }, new { @class = "btn btn-warning btn-sm" }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.SubjectId }, new { @class = "btn btn-info btn-sm" }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.SubjectId }, new { @class = "btn btn-danger btn-sm" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

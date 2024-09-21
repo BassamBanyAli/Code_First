@@ -10,123 +10,133 @@ using Code_First.Models;
 
 namespace Code_First.Controllers
 {
-    public class StudentsController : Controller
+    public class UsersController : Controller
     {
         private MyDbContext db = new MyDbContext();
 
-        // GET: Students
-        public ActionResult Index(int? classId)
+        // GET: Users
+        public ActionResult Index()
         {
+            return View(db.Users.ToList());
+        }
+        public ActionResult Login()
+        {
+            return View();
+        }
+        // POST: Account/Login
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Login(User user)
+        {
+            // Check if the user exists in the database with the provided email and password
+            var logged = db.Users.Any(x => x.Email == user.Email && x.Password == user.Password);
 
-            if (Session["IsLoginSuccessful"] != null && (bool)Session["IsLoginSuccessful"])
+            if (logged)
             {
-                var students = db.Students.Include(s => s.Class)
-                                      .Where(x => x.ClassId == classId)
-                                      .ToList();
-                return View(students);
+                // Set session variable to indicate that the user is logged in
+                Session["IsLoginSuccessful"] = true;
+
+                // If login is successful, redirect to the Home page
+                return RedirectToAction("Index", "Home");
             }
-                return RedirectToAction("Login", "Users");
-           
+
+            // Add error message if login fails
+            ModelState.AddModelError("", "Invalid email or password.");
+            return View(user);
         }
 
 
-        // GET: Students/Details/5
+        // GET: Users/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Student student = db.Students.Find(id);
-            if (student == null)
+            User user = db.Users.Find(id);
+            if (user == null)
             {
                 return HttpNotFound();
             }
-            return View(student);
+            return View(user);
         }
 
-        // GET: Students/Create
+        // GET: Users/Create
         public ActionResult Create()
         {
-            ViewBag.ClassId = new SelectList(db.Classes, "ClassId", "ClassName");
             return View();
         }
 
-        // POST: Students/Create
+        // POST: Users/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "StudentId,StudentName,ClassId")] Student student)
+        public ActionResult Create([Bind(Include = "Id,Email,Password")] User user)
         {
             if (ModelState.IsValid)
             {
-                db.Students.Add(student);
+                db.Users.Add(user);
                 db.SaveChanges();
-                // Redirect to the Index action with the classId
-                return RedirectToAction("Index", "Students", new { classId = student.ClassId });
+                return RedirectToAction("Login");
             }
 
-            ViewBag.ClassId = new SelectList(db.Classes, "ClassId", "ClassName", student.ClassId);
-            return View(student);
+            return View(user);
         }
 
-
-        // GET: Students/Edit/5
+        // GET: Users/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Student student = db.Students.Find(id);
-            if (student == null)
+            User user = db.Users.Find(id);
+            if (user == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.ClassId = new SelectList(db.Classes, "ClassId", "ClassName", student.ClassId);
-            return View(student);
+            return View(user);
         }
 
-        // POST: Students/Edit/5
+        // POST: Users/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "StudentId,StudentName,ClassId")] Student student)
+        public ActionResult Edit([Bind(Include = "Id,Email,Password")] User user)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(student).State = EntityState.Modified;
+                db.Entry(user).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.ClassId = new SelectList(db.Classes, "ClassId", "ClassName", student.ClassId);
-            return View(student);
+            return View(user);
         }
 
-        // GET: Students/Delete/5
+        // GET: Users/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Student student = db.Students.Find(id);
-            if (student == null)
+            User user = db.Users.Find(id);
+            if (user == null)
             {
                 return HttpNotFound();
             }
-            return View(student);
+            return View(user);
         }
 
-        // POST: Students/Delete/5
+        // POST: Users/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Student student = db.Students.Find(id);
-            db.Students.Remove(student);
+            User user = db.Users.Find(id);
+            db.Users.Remove(user);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

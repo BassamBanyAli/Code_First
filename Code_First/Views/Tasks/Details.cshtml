@@ -1,4 +1,4 @@
-﻿@model Code_First.Models.Student
+﻿@model Code_First.Models.Task
 
 @{
     ViewBag.Title = "Details";
@@ -7,7 +7,7 @@
 <h2>Details</h2>
 
 <div>
-    <h4>Student</h4>
+    <h4>Task</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -19,16 +19,24 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.StudentName)
+            @Html.DisplayNameFor(model => model.TaskName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.StudentName)
+            @Html.DisplayFor(model => model.TaskName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
         </dd>
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.StudentId }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.TaskId }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

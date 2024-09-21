@@ -1,0 +1,29 @@
+﻿@model Code_First.Models.Subject
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Subject Details</h2>
+
+    <div class="card p-4">
+        <h4>Subject Information</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+        </dl>
+    </div>
+
+    <div class="mt-4">
+        <p>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.SubjectId }, new { @class = "btn btn-warning" }) |
+            @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-secondary" })
+        </p>
+    </div>
+</div>

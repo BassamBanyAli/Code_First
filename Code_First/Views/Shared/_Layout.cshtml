@@ -8,22 +8,53 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary">
         <div class="container">
-            @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
+            <a class="navbar-brand me-2" href="#">
+                <img src="https://mdbcdn.b-cdn.net/img/logo/mdb-transaprent-noshadows.webp"
+                     height="16"
+                     alt="MDB Logo"
+                     loading="lazy"
+                     style="margin-top: -1px;" />
+            </a>
+
+            <button class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarButtonsExample"
+                    aria-controls="navbarButtonsExample"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
-                <ul class="navbar-nav flex-grow-1">
-                    <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("About", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+
+            <div class="collapse navbar-collapse" id="navbarButtonsExample">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Dashboard</a>
+                    </li>
                 </ul>
+                <div class="d-flex align-items-center">
+                    @if (Session["IsLoginSuccessful"] != null && (bool)Session["IsLoginSuccessful"])
+                    {
+                        @* Profile Button *@
+                        @Html.ActionLink("Profile", "Profile", "Account", null, new { @class = "btn btn-link px-3 me-2" })
+                        @* Logout Button (Optional) *@
+                        @Html.ActionLink("Logout", "Logout", "Account", null, new { @class = "btn btn-danger me-3" })
+                    }
+                    else
+                    {
+                        @* Login Button *@
+                        @Html.ActionLink("Login", "Login", "Users", null, new { @class = "btn btn-link px-3 me-2" })
+                        @* Sign Up Button *@
+                        @Html.ActionLink("Sign up for free", "Create", "Users", null, new { @class = "btn btn-primary me-3" })
+                    }
+                </div>
             </div>
         </div>
     </nav>
+    <!-- Main content -->
     <div class="container body-content">
         @RenderBody()
         <hr />

@@ -5,10 +5,11 @@ using System.Web;
 
 namespace Code_First.Models
 {
-    public class Student
+    public class Task
     {
-        public int StudentId { get; set; }
-        public string StudentName { get; set; }
+        public int TaskId { get; set; }
+        public string TaskName { get; set; }
+        public string Description { get; set; }
         public int ClassId { get; set; }
         public Class Class { get; set; }
     }

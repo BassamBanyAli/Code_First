@@ -1,0 +1,29 @@
+﻿@model IEnumerable<Code_First.Models.Class>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Class Overview</h2>
+    <p class="text-center">
+        @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-success" })
+    </p>
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-4 mb-4 d-flex justify-content-center">
+                <div class="card" style="width: 100%;">
+                    <img src="https://img.freepik.com/free-vector/empty-classroom-interior-with-chalkboard_1308-65378.jpg" class="card-img-top" alt="Class Image" />
+                    <div class="card-body">
+                        <h5 class="card-title">@item.ClassName</h5>
+                        <p class="card-text">Explore tasks and students related to this class.</p>
+                        @Html.ActionLink("View Tasks", "Index", "Tasks", new { classId = item.ClassId }, new { @class = "btn btn-primary", data_mdb_ripple_init = "" })
+                        @Html.ActionLink("View Students", "Index", "Students", new { classId = item.ClassId }, new { @class = "btn btn-secondary", data_mdb_ripple_init = "" })
+                        @Html.ActionLink("Delete Class", "Delete", "Classes", new { id = item.ClassId }, new { @class = "btn btn-danger", onclick = "return confirm('Are you sure you want to delete this class?');" })
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

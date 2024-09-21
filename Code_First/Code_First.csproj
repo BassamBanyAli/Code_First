@@ -127,28 +127,26 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\CoursesController.cs" />
+    <Compile Include="Controllers\ClassesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\StudentDetailsController.cs" />
     <Compile Include="Controllers\StudentsController.cs" />
-    <Compile Include="Controllers\TeachersController.cs" />
+    <Compile Include="Controllers\SubjectsController.cs" />
+    <Compile Include="Controllers\TasksController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202409182231128_CreateStudentAndStudentDetailsTables.cs" />
-    <Compile Include="Migrations\202409182231128_CreateStudentAndStudentDetailsTables.Designer.cs">
-      <DependentUpon>202409182231128_CreateStudentAndStudentDetailsTables.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202409182327090_CreateStudentAndStudentDetailsTables2.cs" />
-    <Compile Include="Migrations\202409182327090_CreateStudentAndStudentDetailsTables2.Designer.cs">
-      <DependentUpon>202409182327090_CreateStudentAndStudentDetailsTables2.cs</DependentUpon>
+    <Compile Include="Migrations\202409211724253_InitialCreate.cs" />
+    <Compile Include="Migrations\202409211724253_InitialCreate.Designer.cs">
+      <DependentUpon>202409211724253_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\Course.cs" />
+    <Compile Include="Models\Class.cs" />
     <Compile Include="Models\MyDbContext.cs" />
     <Compile Include="Models\Student.cs" />
-    <Compile Include="Models\StudentDetails.cs" />
-    <Compile Include="Models\Teacher.cs" />
+    <Compile Include="Models\Subject.cs" />
+    <Compile Include="Models\Task.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -202,26 +200,32 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Courses\Create.cshtml" />
-    <Content Include="Views\Courses\Delete.cshtml" />
-    <Content Include="Views\Courses\Details.cshtml" />
-    <Content Include="Views\Courses\Edit.cshtml" />
-    <Content Include="Views\Courses\Index.cshtml" />
+    <Content Include="Views\Users\Create.cshtml" />
+    <Content Include="Views\Users\Delete.cshtml" />
+    <Content Include="Views\Users\Details.cshtml" />
+    <Content Include="Views\Users\Edit.cshtml" />
+    <Content Include="Views\Users\Index.cshtml" />
+    <Content Include="Views\Users\Login.cshtml" />
+    <Content Include="Views\Subjects\Create.cshtml" />
+    <Content Include="Views\Subjects\Delete.cshtml" />
+    <Content Include="Views\Subjects\Details.cshtml" />
+    <Content Include="Views\Subjects\Edit.cshtml" />
+    <Content Include="Views\Subjects\Index.cshtml" />
+    <Content Include="Views\Classes\Create.cshtml" />
+    <Content Include="Views\Classes\Delete.cshtml" />
+    <Content Include="Views\Classes\Details.cshtml" />
+    <Content Include="Views\Classes\Edit.cshtml" />
+    <Content Include="Views\Classes\Index.cshtml" />
     <Content Include="Views\Students\Create.cshtml" />
     <Content Include="Views\Students\Delete.cshtml" />
     <Content Include="Views\Students\Details.cshtml" />
     <Content Include="Views\Students\Edit.cshtml" />
     <Content Include="Views\Students\Index.cshtml" />
-    <Content Include="Views\StudentDetails\Create.cshtml" />
-    <Content Include="Views\StudentDetails\Delete.cshtml" />
-    <Content Include="Views\StudentDetails\Details.cshtml" />
-    <Content Include="Views\StudentDetails\Edit.cshtml" />
-    <Content Include="Views\StudentDetails\Index.cshtml" />
-    <Content Include="Views\Teachers\Create.cshtml" />
-    <Content Include="Views\Teachers\Delete.cshtml" />
-    <Content Include="Views\Teachers\Details.cshtml" />
-    <Content Include="Views\Teachers\Edit.cshtml" />
-    <Content Include="Views\Teachers\Index.cshtml" />
+    <Content Include="Views\Tasks\Create.cshtml" />
+    <Content Include="Views\Tasks\Delete.cshtml" />
+    <Content Include="Views\Tasks\Details.cshtml" />
+    <Content Include="Views\Tasks\Edit.cshtml" />
+    <Content Include="Views\Tasks\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -254,11 +258,8 @@
     <Content Include="Scripts\jquery-3.7.0.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202409182231128_CreateStudentAndStudentDetailsTables.resx">
-      <DependentUpon>202409182231128_CreateStudentAndStudentDetailsTables.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202409182327090_CreateStudentAndStudentDetailsTables2.resx">
-      <DependentUpon>202409182327090_CreateStudentAndStudentDetailsTables2.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202409211724253_InitialCreate.resx">
+      <DependentUpon>202409211724253_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

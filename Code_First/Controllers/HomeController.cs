@@ -10,7 +10,12 @@ namespace Code_First.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            if(Session["IsLoginSuccessful"] != null && (bool)Session["IsLoginSuccessful"])
+            {
+                return View();
+            }
+            return RedirectToAction("Login","Users");
+
         }
 
         public ActionResult About()

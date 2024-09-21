@@ -10,123 +10,118 @@ using Code_First.Models;
 
 namespace Code_First.Controllers
 {
-    public class StudentsController : Controller
+    public class TasksController : Controller
     {
         private MyDbContext db = new MyDbContext();
 
-        // GET: Students
-        public ActionResult Index(int? classId)
+        // GET: Tasks
+        public ActionResult Index(int? ClassId)
         {
 
             if (Session["IsLoginSuccessful"] != null && (bool)Session["IsLoginSuccessful"])
             {
-                var students = db.Students.Include(s => s.Class)
-                                      .Where(x => x.ClassId == classId)
-                                      .ToList();
-                return View(students);
+                var tasks = db.Tasks.Include(t => t.Class).Where(x => x.ClassId == ClassId).ToList();
+                return View(tasks.ToList());
             }
-                return RedirectToAction("Login", "Users");
-           
+
+            return RedirectToAction("Login", "Users");
         }
 
-
-        // GET: Students/Details/5
+        // GET: Tasks/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Student student = db.Students.Find(id);
-            if (student == null)
+            Task task = db.Tasks.Find(id);
+            if (task == null)
             {
                 return HttpNotFound();
             }
-            return View(student);
+            return View(task);
         }
 
-        // GET: Students/Create
+        // GET: Tasks/Create
         public ActionResult Create()
         {
             ViewBag.ClassId = new SelectList(db.Classes, "ClassId", "ClassName");
             return View();
         }
 
-        // POST: Students/Create
+        // POST: Tasks/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "StudentId,StudentName,ClassId")] Student student)
+        public ActionResult Create([Bind(Include = "TaskId,TaskName,Description,ClassId")] Task task)
         {
             if (ModelState.IsValid)
             {
-                db.Students.Add(student);
+                db.Tasks.Add(task);
                 db.SaveChanges();
-                // Redirect to the Index action with the classId
-                return RedirectToAction("Index", "Students", new { classId = student.ClassId });
+                return RedirectToAction("Index", new { classId = task.ClassId });
             }
 
-            ViewBag.ClassId = new SelectList(db.Classes, "ClassId", "ClassName", student.ClassId);
-            return View(student);
+            ViewBag.ClassId = new SelectList(db.Classes, "ClassId", "ClassName", task.ClassId);
+            return View(task);
         }
 
-
-        // GET: Students/Edit/5
+        // GET: Tasks/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Student student = db.Students.Find(id);
-            if (student == null)
+            Task task = db.Tasks.Find(id);
+            if (task == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.ClassId = new SelectList(db.Classes, "ClassId", "ClassName", student.ClassId);
-            return View(student);
+            ViewBag.ClassId = new SelectList(db.Classes, "ClassId", "ClassName", task.ClassId);
+            return View(task);
         }
 
-        // POST: Students/Edit/5
+        // POST: Tasks/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "StudentId,StudentName,ClassId")] Student student)
+        public ActionResult Edit([Bind(Include = "TaskId,TaskName,Description,ClassId")] Task task)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(student).State = EntityState.Modified;
+                db.Entry(task).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.ClassId = new SelectList(db.Classes, "ClassId", "ClassName", student.ClassId);
-            return View(student);
+            ViewBag.ClassId = new SelectList(db.Classes, "ClassId", "ClassName", task.ClassId);
+            return View(task);
         }
 
-        // GET: Students/Delete/5
+        // GET: Tasks/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Student student = db.Students.Find(id);
-            if (student == null)
+            Task task = db.Tasks.Find(id);
+            if (task == null)
             {
                 return HttpNotFound();
             }
-            return View(student);
+            return View(task);
         }
 
-        // POST: Students/Delete/5
+        // POST: Tasks/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Student student = db.Students.Find(id);
-            db.Students.Remove(student);
+            Task task = db.Tasks.Find(id);
+            db.Tasks.Remove(task);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
